@@ -22,3 +22,12 @@ def get_videos():
     conn.close()
     dados = dados_seriliazados(videos)
     return dados
+
+def delete_videos(id):
+    conn = db_conexao()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE videos SET ativo = false WHERE id = %s", (id,))
+    conn.commit()
+    cursor.execute("UPDATE favoritos SET ativo = false WHERE videoid = %s", (id,))
+    conn.close()
+    return True
