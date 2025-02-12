@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from videos_repository import get_videos, delete_videos
+from videos_repository import get_videos, delete_videos, post_videos
 
 app = Flask(__name__)
 
@@ -24,6 +24,23 @@ def get_video():
     try:
         data = get_videos()
         return jsonify(data), 200
+    except Exception as e:
+        return jsonify(
+            {
+                'status': 'failed',
+                'message': 'Internal server error'}
+            ), 500
+
+@app.route('/videos', methods=['POST'])
+def post_video():
+    try:
+        data = request.json
+        post_videos(data['titulo'], data['descricao'], data['url'], data['categoria_id'])
+        return jsonify(
+            {
+                'status': 'success',
+                'message': 'Video added successfully'}
+            ), 201
     except Exception as e:
         return jsonify(
             {
