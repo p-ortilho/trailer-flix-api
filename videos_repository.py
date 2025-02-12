@@ -7,7 +7,8 @@ def dados_seriliazados(dados):
             "titulo": dado[1],
             "descricao": dado[2],
             "url": dado[3],
-            "categoriaId": dado[4]
+            "categoriaId": dado[4],
+            "ativo": dado[5],
         }
         for dado in dados
     ]
@@ -16,7 +17,7 @@ def dados_seriliazados(dados):
 def get_videos():
     conn = db_conexao()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM videos")
+    cursor.execute("SELECT * FROM videos WHERE ativo <> false")
     videos = cursor.fetchall()
     conn.close()
     dados = dados_seriliazados(videos)
