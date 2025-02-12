@@ -31,6 +31,14 @@ def post_videos(titulo, descricao, url, categoria_id):
     conn.close()
     return True
 
+def put_videos(id, titulo, descricao, url, categoria_id):
+    conn = db_conexao()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE videos SET titulo = %s, descricao = %s, url = %s, categoriaid = %s WHERE id = %s", (titulo, descricao, url, categoria_id, id))
+    conn.commit()
+    conn.close()
+    return True
+
 def delete_videos(id):
     conn = db_conexao()
     cursor = conn.cursor()
