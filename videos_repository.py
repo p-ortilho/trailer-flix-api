@@ -23,6 +23,14 @@ def get_videos():
     dados = dados_seriliazados(videos)
     return dados
 
+def post_videos(titulo, descricao, url, categoria_id):
+    conn = db_conexao()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO videos (titulo, descricao, url, categoriaid) VALUES (%s, %s, %s, %s)", (titulo, descricao, url, categoria_id))
+    conn.commit()
+    conn.close()
+    return True
+
 def delete_videos(id):
     conn = db_conexao()
     cursor = conn.cursor()
