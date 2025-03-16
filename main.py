@@ -44,7 +44,7 @@ def get_categorias():
         return jsonify(
             {
                 'status': 'failed',
-                'message': 'Internal server error'}
+                'message': f'Internal server error {e}'}
             ), 500
 
 @app.route('/videos', methods=['POST'])
