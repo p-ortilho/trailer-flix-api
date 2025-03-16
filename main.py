@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from videos_repository import get_videos, delete_videos, post_videos, put_videos
+from categorias_repository import get_categorias
 import os
 
 app = Flask(__name__)
@@ -26,6 +27,18 @@ def index():
 def get_video():
     try:
         data = get_videos()
+        return jsonify(data), 200
+    except Exception as e:
+        return jsonify(
+            {
+                'status': 'failed',
+                'message': 'Internal server error'}
+            ), 500
+
+@app.route('/categorias', methods=['GET'])
+def get_categorias():
+    try:
+        data = get_categorias()
         return jsonify(data), 200
     except Exception as e:
         return jsonify(
