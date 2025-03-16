@@ -1,3 +1,5 @@
+from db_con.config_db import db_conexao
+
 def dados_seriliazados(dados) -> list:
     json = [
         {
