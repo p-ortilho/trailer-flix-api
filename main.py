@@ -36,7 +36,7 @@ def get_video():
             ), 500
 
 @app.route('/categorias', methods=['GET'])
-def get_categorias():
+def get_categoria():
     try:
         data = get_categorias()
         return jsonify(data), 200
